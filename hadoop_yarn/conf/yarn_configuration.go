@@ -1,6 +1,7 @@
 package conf
 
 import (
+	"fmt"
 	hadoop_conf "github.com/hortonworks/gohadoop/hadoop_common/conf"
 )
 
@@ -65,4 +66,10 @@ func (yarn_conf *yarn_configuration) SetRMSchedulerAddress(address string) error
 func NewYarnConfiguration() (YarnConfiguration, error) {
 	c, err := hadoop_conf.NewConfigurationResources([]string{YARN_DEFAULT, YARN_SITE})
 	return &yarn_configuration{conf: c}, err
+}
+
+func (yarn_conf yarn_configuration) String() string {
+	rmaddress, _ := yarn_conf.GetRMAddress()
+	rmSchedulerAddress, _ := yarn_conf.GetRMSchedulerAddress()
+	return fmt.Sprintf("RMAddress: %s, RMSchedulerAddress: %s", rmaddress, rmSchedulerAddress)
 }

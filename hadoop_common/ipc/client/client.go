@@ -105,6 +105,7 @@ func getConnection(c *Client, connectionId *connection_id) (*connection, error) 
 
 func setupConnection(c *Client) (*connection, error) {
 	addr, _ := net.ResolveTCPAddr("tcp", c.ServerAddress)
+	log.Printf("Address is : %v\n", addr)
 	tcpConn, err := net.DialTCP("tcp", nil, addr)
 	if err != nil {
 		log.Println("error: ", err)

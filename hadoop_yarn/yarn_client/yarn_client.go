@@ -10,6 +10,7 @@ type YarnClient struct {
 }
 
 func CreateYarnClient(conf yarn_conf.YarnConfiguration) (*YarnClient, error) {
+  log.Printf("Configuration for yarn is %v", conf)
   c, err := hadoop_yarn.DialApplicationClientProtocolService(conf)
   return &YarnClient{client: c}, err
 }
